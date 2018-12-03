@@ -18,8 +18,11 @@ public class InteractiveFiction {
 		printMap(playerrow, playercolumn);
 		String line = getUserInput(hello);
 		String keyword = getKeyword(line, keywords); 
-		System.out.println(common.length + " " + jabber.length);
+		
+		
 		while((keyword == null) || !keyword.equalsIgnoreCase("Quit")) {
+			
+			if (keyword != null) {
 			if (keyword.equalsIgnoreCase("North")) {
 				if(playerrow != 0) {
 					playerrow--;
@@ -51,19 +54,21 @@ public class InteractiveFiction {
 				printMap(playerrow, playercolumn);
 			} else if (keyword.equalsIgnoreCase("Help")) {
 				getHelp(keywords);
-			} else if ((playerrow == 2) && (playercolumn == 1)) {
-				getJabberwordyResponse(line);
-			}
-			
-			
-			else {
+			} else {
 				ArrayList<String> responses = getTalkResponses(keyword, playername, playerrow, playercolumn);
 				System.out.println(getRandomElement(responses));
 			}
+			}
+			
 			
 		 line = getUserInput(hello);
 		 keyword = getKeyword(line, keywords); 
-			
+					 
+		 if ((playerrow == 1) && (playercolumn == 0)) {
+			    System.out.println(descriptions[playerrow][playercolumn]);
+				System.out.println(getJabberwordyResponse(line));
+				
+			}
 			
 		}
 		
@@ -164,7 +169,7 @@ public class InteractiveFiction {
 		String[] jabber = {"ancient", "ballerina", "banana", "bankroll", "berserker", "birthplace", "blathering", "bouncy", "boutique", "candelabra", "cannibal", "capacitor", "circuit", "crash", "craven", "creepy", "dance", "dangerous", "daring", "dastardly", "download", "dragon", "ego", "evaluate", "feudal", "fiery", "flux", "funky", "ghostly", "glass", "gold", "grizzly", "hatch", "Hogwarts", "horn", "impure", "jump", "muscle", "near", "nicest", "omnivore", "parasite", "patronus", "punch", "salad", "savage", "seven", "shameful", "since", "slither", "sonic", "spaceship", "square", "tango", "tape", "throughout", "upon", "volcano"};
 		for(int i = 0; i < common.length; i++) {
 			int j = (i >= jabber.length - 1) ? 0 : i;
-			line.replace(common[i], jabber[i]);
+			line = line.replace(common[i], jabber[j]);
 			
 		}
 		return line;
